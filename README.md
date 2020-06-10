@@ -30,7 +30,7 @@ GoAccess [![Build Status](https://travis-ci.org/allinurl/goaccess.svg?branch=mas
 
 ### 경로 확인 후 실행
 
-    $ docker run -d -p 7890:7890 \
+    $ docker run -d \
         -v "/내폴더/goaccess/data:/goaccess" \
         -v "/내폴더/goaccess/data/access.log:/goaccess/access.log" \
         --name=goaccess shockutility/goaccess \
