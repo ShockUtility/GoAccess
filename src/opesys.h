@@ -30,7 +30,7 @@
 #ifndef OPESYS_H_INCLUDED
 #define OPESYS_H_INCLUDED
 
-#define OPESYS_TYPE_LEN  10
+#define OPESYS_TYPE_LEN  16
 
 /* Each OS contains the number of hits and the OS's type */
 typedef struct GOpeSys_ {

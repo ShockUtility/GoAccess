@@ -22,6 +22,12 @@ GoAccess [![Build Status](https://travis-ci.org/allinurl/goaccess.svg?branch=mas
     ignore-panel KEYPHRASES
 
 
+### 변경된 소스 파일
+
+    opesys.c
+    opesys.h
+
+
 ### 경로 확인 후 실행
 
     $ docker run -d -p 7890:7890 \
