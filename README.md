@@ -14,12 +14,15 @@ GoAccess [![Build Status](https://travis-ci.org/allinurl/goaccess.svg?branch=mas
     date-format %Y-%m-%d
     log-format %dT%t.%^ %^ %h:%^ %^ %T %^ %^ %^ %s %^ %b "%r" "%u"
 
-    log-file /goaccess/access.log
-    output /goaccess/report.html
-
     ignore-panel REFERRERS
     ignore-panel REFERRING_SITES
     ignore-panel KEYPHRASES
+
+
+### 설정 파일 셋팅 (로그파일 지정 옵션)
+
+    log-file /goaccess/access.log
+    output /goaccess/report.html
 
 
 ### 변경된 소스 파일
@@ -30,11 +33,16 @@ GoAccess [![Build Status](https://travis-ci.org/allinurl/goaccess.svg?branch=mas
 
 ### 경로 확인 후 실행
 
+    $ cat access.log | docker run --rm -i \
+        -v "/내폴더/data:/goaccess" \
+        shockutility/goaccess -a -o html \
+        --config-file /goaccess/goaccess.conf - > report.html
+
     $ docker run -d \
         -v "/내폴더/data:/goaccess" \
         -v "/내폴더/data/access.log:/goaccess/access.log" \
         --name=goaccess shockutility/goaccess \
-        goaccess --no-global-config --config-file=/goaccess/goaccess.conf
+        shockutility/goaccess --no-global-config --config-file=/goaccess/goaccess.conf
 
 
 ## What is it? ##
