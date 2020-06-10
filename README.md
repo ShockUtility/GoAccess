@@ -1,6 +1,36 @@
 GoAccess [![Build Status](https://travis-ci.org/allinurl/goaccess.svg?branch=master)](https://travis-ci.org/allinurl/goaccess) [![GoAccess](https://goaccess.io/badge?v1.0)](https://goaccess.io)
 ========
 
+## 내 환경에 맞게 몇가지 사항 수정해서 사용할 목적임 ##
+
+### Build
+
+    $ docker build -t shockutility/goaccess .
+
+
+### 설정 파일 셋팅 (goaccess.conf)
+
+    time-format %T
+    date-format %Y-%m-%d
+    log-format %dT%t.%^ %^ %h:%^ %^ %T %^ %^ %^ %s %^ %b "%r" "%u"
+
+    log-file /goaccess/access.log
+    output /goaccess/report.html
+
+    ignore-panel REFERRERS
+    ignore-panel REFERRING_SITES
+    ignore-panel KEYPHRASES
+
+
+### 경로 확인 후 실행
+
+    $ docker run -d -p 7890:7890 \
+        -v "/내폴더/goaccess/data:/goaccess" \
+        -v "/내폴더/goaccess/data/access.log:/goaccess/access.log" \
+        --name=goaccess shockutility/goaccess \
+        goaccess --no-global-config --config-file=/goaccess/goaccess.conf
+
+
 ## What is it? ##
 GoAccess is an open source **real-time web log analyzer** and interactive
 viewer that runs in a **terminal** on &ast;nix systems or through your
@@ -235,11 +265,11 @@ To output to a terminal and generate an interactive report:
 To generate an HTML report:
 
     # goaccess access.log -a > report.html
-    
+
 To generate a JSON report:
 
     # goaccess access.log -a -d -o json > report.json
-    
+
 To generate a CSV file:
 
     # goaccess access.log --no-csv-summary -o csv > report.csv
@@ -352,7 +382,7 @@ And you would like to append the virtual host to the request in order to see
 which virtual host the top urls belong to:
 
     awk '$8=$1$8' access.log | goaccess -a -
-    
+
 To do the same, but also use real-time filtering and parsing:
 
     tail -f  access.log | unbuffer -p awk '$8=$1$8' | goaccess -a -
